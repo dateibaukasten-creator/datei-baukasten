@@ -1,1 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://datei-baukasten.de/</loc></url></urlset>
+<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://datei-baukasten.de/</loc><priority>1.0</priority></url>
+  
+  <url><loc>https://datei-baukasten.de/png-zu-jpg.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+
+  <url><loc>https://datei-baukasten.de/jpg-zu-png.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+
+  <url><loc>https://datei-baukasten.de/webp-zu-jpg.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+
+  <url><loc>https://datei-baukasten.de/heic-zu-jpg.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+
+  <url><loc>https://datei-baukasten.de/pdf-komprimieren.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+
+  <url><loc>https://datei-baukasten.de/pdf-zusammenfuegen.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+
+  <url><loc>https://datei-baukasten.de/pdf-teilen.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+
+  <url><loc>https://datei-baukasten.de/bild-verkleinern.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+
+  <url><loc>https://datei-baukasten.de/png-komprimieren.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+
+  <url><loc>https://datei-baukasten.de/jpg-komprimieren.html</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+</urlset>
