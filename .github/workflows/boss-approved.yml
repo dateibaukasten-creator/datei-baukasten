@@ -1,19 +1,24 @@
 name: Boss Approved Run
+
 on:
   push:
     paths:
-      - 'approvals/**'   # wird von deinem JA-Button geschrieben
+      # Triggert NUR wenn eine approval-Datei mit "go" erstellt wurde
+      - 'approvals/*go.json'
+
 permissions:
-  contents: write        # damit wir committen dürfen
+  contents: write
+
 jobs:
   generate:
-    if: contains(github.event.head_commit.message, 'boss: go')  # nur bei "JA"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with: { fetch-depth: 0 }
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
-        with: { node-version: '18' }
+        with:
+          node-version: '18'
       - name: Erzeuge 10 neue Seiten
         run: node ops/generator.js
       - name: Änderungen committen
