@@ -1,7 +1,39 @@
-name: Boss Approved (Test)
-on: workflow_dispatch
+name: Boss Approved Run
+on: workflow_dispatch   # erst mal nur manuell; automatisch bauen wir später dazu
+
+permissions:
+  contents: write
+
 jobs:
-  hello:
+  generate:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "hello from boss approved test"
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Debug – Status anzeigen
+        run: |
+          echo "Node:"; node -v
+          echo "--- Root"; ls -la
+          echo "--- ops"; ls -la ops || true
+          echo "--- utility-site"; ls -la utility-site || true
+          echo "--- seed.json"; cat ops/seed.json || true
+
+      - name: Generator ausführen (tolerant)
+        run: |
+          node ops/generator.js || echo "::warning ::Generator ohne neue Seiten oder mit Fallback gelaufen"
+
+      - name: Änderungen committen & pushen
+        run: |
+          git config user.name  "auto-bot"
+          git config user.email "auto-bot@users.noreply.github.com"
+          git add -A
+          git commit -m "auto: +10 Seiten (Generator)" || echo "nichts zu committen"
+          git push
