@@ -1,3 +1,10 @@
 [build]
   publish = "utility-site"
   functions = "netlify/functions"
+# Erzwingt www für alle Aufrufe der Apex-Domain
+[[redirects]]
+  from = "/*"
+  to = "https://www.datei-baukasten.de/:splat"
+  status = 301
+  force = true
+  conditions = { Host = ["datei-baukasten.de"] }
