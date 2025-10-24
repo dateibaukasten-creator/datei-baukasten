@@ -3,14 +3,15 @@ name: Boss Approved Run
 on:
   push:
     paths:
-      # Triggert NUR wenn eine approval-Datei mit "go" erstellt wurde
-      - 'approvals/*go.json'
+      - 'approvals/**'     # reagiert auf JEDE Datei in /approvals
+  workflow_dispatch:       # manuell aus Actions startbar
 
 permissions:
   contents: write
 
 jobs:
   generate:
+    if: "contains(github.event.head_commit.message, 'boss: go')"  # nur bei JA-Commit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
