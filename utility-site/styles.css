@@ -1,1 +1,11 @@
-body{font-family:system-ui}
+:root { --bg:#0b1020; --card:#121a32; --acc:#7bdcff; --txt:#e9eefc; --mut:#9bb0d1; --link:#9ae6ff; }
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{font:16px/1.6 system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--txt);display:flex;justify-content:center}
+.container{max-width:920px;width:100%;padding:40px 20px}
+header h1{margin:0 0 6px;font-size:34px}
+header p{margin:0 0 24px;color:var(--mut)}
+ul.tools{list-style:none;padding:0;display:grid;gap:12px}
+.tools li a{display:block;padding:14px 16px;background:var(--card);border:1px solid #1e2a52;border-radius:14px;text-decoration:none;color:var(--txt)}
+.tools li a:hover{outline:2px solid var(--acc)}
+footer{margin-top:28px;color:var(--mut)}
+footer a{color:var(--link)}
