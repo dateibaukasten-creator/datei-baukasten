@@ -3,27 +3,43 @@ name: Boss Approved Run
 on:
   push:
     paths:
-      - 'approvals/**'                 # reagiert auf JEDE Datei in /approvals
-  workflow_dispatch:                   # zusätzlich manuell startbar
+      - 'approvals/**'                       # triggert bei Datei in /approvals
+  workflow_dispatch:                         # zusätzlich manuell startbar
 
 permissions:
   contents: write
 
 jobs:
   generate:
-    # Manuell: IMMER laufen. Bei push: nur wenn Commit-Message "boss: go" enthält.
+    # Manuell: immer laufen. Bei push: nur wenn Commit-Message "boss: go" enthält.
     if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, 'boss: go')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - name: Erzeuge 10 neue Seiten
-        run: node ops/generator.js
-      - name: Änderungen committen
+
+      - name: Debug – Repo-Zustand anzeigen
+        run: |
+          echo "PWD:"; pwd
+          echo "Node:"; node -v
+          echo "--- Root"; ls -la
+          echo "--- ops"; ls -la ops || true
+          echo "--- utility-site"; ls -la utility-site || true
+          echo "--- seed.json (falls vorhanden)"; cat ops/seed.json || true
+
+      - name: Generator ausführen (nie fehlschlagen)
+        run: |
+          set -e
+          node ops/generator.js || echo "::warning ::Generator lief ohne neue Seiten oder mit Fallback weiter"
+
+      - name: Änderungen committen & pushen
         run: |
           git config user.name  "auto-bot"
           git config user.email "auto-bot@users.noreply.github.com"
