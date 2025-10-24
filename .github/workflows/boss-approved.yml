@@ -3,15 +3,15 @@ name: Boss Approved Run
 on:
   push:
     paths:
-      - 'approvals/**'                       # triggert bei Datei in /approvals
-  workflow_dispatch:                         # zusätzlich manuell startbar
+      - 'approvals/**'                       # feuert, wenn in /approvals eine Datei entsteht
+  workflow_dispatch:                         # zusätzlich: manuell startbar
 
 permissions:
   contents: write
 
 jobs:
   generate:
-    # Manuell: immer laufen. Bei push: nur wenn Commit-Message "boss: go" enthält.
+    # Manuell: immer laufen. Bei push: nur wenn die Commit-Message "boss: go" enthält.
     if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, 'boss: go')
     runs-on: ubuntu-latest
     steps:
@@ -25,19 +25,17 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Debug – Repo-Zustand anzeigen
+      - name: Debug – Status anzeigen
         run: |
-          echo "PWD:"; pwd
           echo "Node:"; node -v
           echo "--- Root"; ls -la
           echo "--- ops"; ls -la ops || true
           echo "--- utility-site"; ls -la utility-site || true
-          echo "--- seed.json (falls vorhanden)"; cat ops/seed.json || true
+          echo "--- seed.json"; cat ops/seed.json || true
 
-      - name: Generator ausführen (nie fehlschlagen)
+      - name: Generator ausführen (fehler-tolerant)
         run: |
-          set -e
-          node ops/generator.js || echo "::warning ::Generator lief ohne neue Seiten oder mit Fallback weiter"
+          node ops/generator.js || echo "::warning ::Generator ohne neue Seiten oder mit Fallback gelaufen"
 
       - name: Änderungen committen & pushen
         run: |
