@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "WA-Chat \u2192 PDF (lokal)",
+  "version": "1.0.0",
+  "description": "Exportiere WhatsApp-Chats als PDF \u2013 100% lokal im Browser.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://web.whatsapp.com/*"
+  ],
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  }
+}

@@ -1,0 +1,1 @@
+export default async (req)=> new Response('<p>ok</p>',{headers:{'Content-Type':'text/html'}})

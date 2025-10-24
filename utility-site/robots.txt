@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://datei-baukasten.de/sitemap.xml
